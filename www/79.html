@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An Nazi'at · القرآن الكريم</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #0D1117;
+    --dark-2: #161B22;
+    --dark-card: #1A2233;
+    --text: #E8E8E8;
+    --text-muted: #8B9BC4;
+    --border: rgba(201,168,76,0.18);
+  }
+  body { background: var(--dark); color: var(--text); font-family: 'Poppins', sans-serif; min-height: 100vh; }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 20% 10%, rgba(46,125,82,0.10) 0%, transparent 60%), var(--dark);
+    z-index: -1;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13,17,23,0.9);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    direction: ltr;
+  }
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .nav-back:hover { gap: 12px; }
+  .nav-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  .nav-num {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .surah-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 40px 24px;
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .surah-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent 50%);
+  }
+  .surah-arabic-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    color: var(--gold);
+    display: block;
+    text-shadow: 0 0 40px rgba(201,168,76,0.25);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .surah-latin-title {
+    font-size: 1rem;
+    color: var(--text-muted);
+    direction: ltr;
+    display: block;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .surah-meaning {
+    font-size: 0.85rem;
+    color: rgba(139,155,196,0.6);
+    direction: ltr;
+    position: relative;
+  }
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px auto;
+  }
+  .surah-text {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    line-height: 2.8;
+    text-align: justify;
+    color: var(--text);
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    direction: rtl;
+    letter-spacing: 0.03em;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .footer-logo { font-size: 0.85rem; color: var(--text-muted); direction: ltr; }
+  .footer-logo span { color: var(--gold); font-weight: 600; }
+  @media (max-width: 480px) {
+    .surah-text { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+  <span class="nav-title">النازعات</span>
+  <span class="nav-num">079</span>
+</nav>
+<main>
+  <div class="surah-header">
+    <span class="surah-arabic-title">النازعات</span>
+    <div class="divider"></div>
+    <span class="surah-latin-title">An Nazi'at</span>
+    <span class="surah-meaning">· Those Who Drag Forth ·</span>
+  </div>
+  <div class="surah-text">
+    ﻿﻿بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ 
+وَالنَّازِعَاتِ غَرْقًا (1) وَالنَّاشِطَاتِ نَشْطًا (2) وَالسَّابِحَاتِ سَبْحًا (3) فَالسَّابِقَاتِ سَبْقًا (4) فَالْمُدَبِّرَاتِ أَمْرًا (5) يَوْمَ تَرْجُفُ الرَّاجِفَةُ (6) تَتْبَعُهَا الرَّادِفَةُ (7) قُلُوبٌ يَوْمَئِذٍ وَاجِفَةٌ (8) أَبْصَارُهَا خَاشِعَةٌ (9) يَقُولُونَ أَئِنَّا لَمَرْدُودُونَ فِي الْحَافِرَةِ (10) أَئِذَا كُنَّا عِظَامًا نَخِرَةً (11) قَالُوا تِلْكَ إِذًا كَرَّةٌ خَاسِرَةٌ (12) فَإِنَّمَا هِيَ زَجْرَةٌ وَاحِدَةٌ (13) فَإِذَا هُمْ بِالسَّاهِرَةِ (14) هَلْ أتَاكَ حَدِيثُ مُوسَى (15) إِذْ نَادَاهُ رَبُّهُ بِالْوَادِ الْمُقَدَّسِ طُوًى (16) اذْهَبْ إِلَى فِرْعَوْنَ إِنَّهُ طَغَى (17) فَقُلْ هَلْ لَكَ إِلَى أَنْ تَزَكَّى (18) وَأَهْدِيَكَ إِلَى رَبِّكَ فَتَخْشَى (19) فَأَرَاهُ الْآَيَةَ الْكُبْرَى (20) فَكَذَّبَ وَعَصَى (21) ثُمَّ أَدْبَرَ يَسْعَى (22) فَحَشَرَ فَنَادَى (23) فَقَالَ أَنَا رَبُّكُمُ الْأَعْلَى (24) فَأَخَذَهُ اللَّهُ نَكَالَ الْآَخِرَةِ وَالْأُولَى (25) إِنَّ فِي ذَلِكَ لَعِبْرَةً لِمَنْ يَخْشَى (26) أَأَنْتُمْ أَشَدُّ خَلْقًا أَمِ السَّمَاءُ بَنَاهَا (27) رَفَعَ سَمْكَهَا فَسَوَّاهَا (28) وَأَغْطَشَ لَيْلَهَا وَأَخْرَجَ ضُحَاهَا (29) وَالْأَرْضَ بَعْدَ ذَلِكَ دَحَاهَا (30) أَخْرَجَ مِنْهَا مَاءَهَا وَمَرْعَاهَا (31) وَالْجِبَالَ أَرْسَاهَا (32) مَتَاعًا لَكُمْ وَلِأَنْعَامِكُمْ (33) فَإِذَا جَاءَتِ الطَّامَّةُ الْكُبْرَى (34) يَوْمَ يَتَذَكَّرُ الْإِنْسَانُ مَا سَعَى (35) وَبُرِّزَتِ الْجَحِيمُ لِمَنْ يَرَى (36) فَأَمَّا مَنْ طَغَى (37) وَآَثَرَ الْحَيَاةَ الدُّنْيَا (38) فَإِنَّ الْجَحِيمَ هِيَ الْمَأْوَى (39) وَأَمَّا مَنْ خَافَ مَقَامَ رَبِّهِ وَنَهَى النَّفْسَ عَنِ الْهَوَى (40) فَإِنَّ الْجَنَّةَ هِيَ الْمَأْوَى (41) يَسْأَلُونَكَ عَنِ السَّاعَةِ أَيَّانَ مُرْسَاهَا (42) فِيمَ أَنْتَ مِنْ ذِكْرَاهَا (43) إِلَى رَبِّكَ مُنْتَهَاهَا (44) إِنَّمَا أَنْتَ مُنْذِرُ مَنْ يَخْشَاهَا (45) كَأَنَّهُمْ يَوْمَ يَرَوْنَهَا لَمْ يَلْبَثُوا إِلَّا عَشِيَّةً أَوْ ضُحَاهَا (46)
+  </div>
+</main>
+<footer>
+  <p class="footer-logo">Powered by <span>OneTechDev</span></p>
+</footer>
+</body>
+</html>

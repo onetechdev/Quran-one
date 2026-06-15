@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An Najm · القرآن الكريم</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #0D1117;
+    --dark-2: #161B22;
+    --dark-card: #1A2233;
+    --text: #E8E8E8;
+    --text-muted: #8B9BC4;
+    --border: rgba(201,168,76,0.18);
+  }
+  body { background: var(--dark); color: var(--text); font-family: 'Poppins', sans-serif; min-height: 100vh; }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 20% 10%, rgba(46,125,82,0.10) 0%, transparent 60%), var(--dark);
+    z-index: -1;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13,17,23,0.9);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    direction: ltr;
+  }
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .nav-back:hover { gap: 12px; }
+  .nav-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  .nav-num {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .surah-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 40px 24px;
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .surah-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent 50%);
+  }
+  .surah-arabic-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    color: var(--gold);
+    display: block;
+    text-shadow: 0 0 40px rgba(201,168,76,0.25);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .surah-latin-title {
+    font-size: 1rem;
+    color: var(--text-muted);
+    direction: ltr;
+    display: block;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .surah-meaning {
+    font-size: 0.85rem;
+    color: rgba(139,155,196,0.6);
+    direction: ltr;
+    position: relative;
+  }
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px auto;
+  }
+  .surah-text {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    line-height: 2.8;
+    text-align: justify;
+    color: var(--text);
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    direction: rtl;
+    letter-spacing: 0.03em;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .footer-logo { font-size: 0.85rem; color: var(--text-muted); direction: ltr; }
+  .footer-logo span { color: var(--gold); font-weight: 600; }
+  @media (max-width: 480px) {
+    .surah-text { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+  <span class="nav-title">النجم</span>
+  <span class="nav-num">053</span>
+</nav>
+<main>
+  <div class="surah-header">
+    <span class="surah-arabic-title">النجم</span>
+    <div class="divider"></div>
+    <span class="surah-latin-title">An Najm</span>
+    <span class="surah-meaning">· The Star ·</span>
+  </div>
+  <div class="surah-text">
+    ﻿﻿بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ 
+وَالنَّجْمِ إِذَا هَوَى (1) مَا ضَلَّ صَاحِبُكُمْ وَمَا غَوَى (2) وَمَا يَنْطِقُ عَنِ الْهَوَى (3) إِنْ هُوَ إِلَّا وَحْيٌ يُوحَى (4) عَلَّمَهُ شَدِيدُ الْقُوَى (5) ذُو مِرَّةٍ فَاسْتَوَى (6) وَهُوَ بِالْأُفُقِ الْأَعْلَى (7) ثُمَّ دَنَا فَتَدَلَّى (8) فَكَانَ قَابَ قَوْسَيْنِ أَوْ أَدْنَى (9) فَأَوْحَى إِلَى عَبْدِهِ مَا أَوْحَى (10) مَا كَذَبَ الْفُؤَادُ مَا رَأَى (11) أَفَتُمَارُونَهُ عَلَى مَا يَرَى (12) وَلَقَدْ رَآَهُ نَزْلَةً أُخْرَى (13) عِنْدَ سِدْرَةِ الْمُنْتَهَى (14) عِنْدَهَا جَنَّةُ الْمَأْوَى (15) إِذْ يَغْشَى السِّدْرَةَ مَا يَغْشَى (16) مَا زَاغَ الْبَصَرُ وَمَا طَغَى (17) لَقَدْ رَأَى مِنْ آَيَاتِ رَبِّهِ الْكُبْرَى (18) أَفَرَأَيْتُمُ اللَّاتَ وَالْعُزَّى (19) وَمَنَاةَ الثَّالِثَةَ الْأُخْرَى (20) أَلَكُمُ الذَّكَرُ وَلَهُ الْأُنْثَى (21) تِلْكَ إِذًا قِسْمَةٌ ضِيزَى (22) إِنْ هِيَ إِلَّا أَسْمَاءٌ سَمَّيْتُمُوهَا أَنْتُمْ وَآَبَاؤُكُمْ مَا أَنْزَلَ اللَّهُ بِهَا مِنْ سُلْطَانٍ إِنْ يَتَّبِعُونَ إِلَّا الظَّنَّ وَمَا تَهْوَى الْأَنْفُسُ وَلَقَدْ جَاءَهُمْ مِنْ رَبِّهِمُ الْهُدَى (23) أَمْ لِلْإِنْسَانِ مَا تَمَنَّى (24) فَلِلَّهِ الْآَخِرَةُ وَالْأُولَى (25) وَكَمْ مِنْ مَلَكٍ فِي السَّمَوَاتِ لَا تُغْنِي شَفَاعَتُهُمْ شَيْئًا إِلَّا مِنْ بَعْدِ أَنْ يَأْذَنَ اللَّهُ لِمَنْ يَشَاءُ وَيَرْضَى (26) إِنَّ الَّذِينَ لَا يُؤْمِنُونَ بِالْآَخِرَةِ لَيُسَمُّونَ الْمَلَائِكَةَ تَسْمِيَةَ الْأُنْثَى (27) وَمَا لَهُمْ بِهِ مِنْ عِلْمٍ إِنْ يَتَّبِعُونَ إِلَّا الظَّنَّ وَإِنَّ الظَّنَّ لَا يُغْنِي مِنَ الْحَقِّ شَيْئًا (28) فَأَعْرِضْ عَنْ مَنْ تَوَلَّى عَنْ ذِكْرِنَا وَلَمْ يُرِدْ إِلَّا الْحَيَاةَ الدُّنْيَا (29) ذَلِكَ مَبْلَغُهُمْ مِنَ الْعِلْمِ إِنَّ رَبَّكَ هُوَ أَعْلَمُ بِمَنْ ضَلَّ عَنْ سَبِيلِهِ وَهُوَ أَعْلَمُ بِمَنِ اهْتَدَى (30) وَلِلَّهِ مَا فِي السَّمَوَاتِ وَمَا فِي الْأَرْضِ لِيَجْزِيَ الَّذِينَ أَسَاءُوا بِمَا عَمِلُوا وَيَجْزِيَ الَّذِينَ أَحْسَنُوا بِالْحُسْنَى (31) الَّذِينَ يَجْتَنِبُونَ كَبَائِرَ الْإِثْمِ وَالْفَوَاحِشَ إِلَّا اللَّمَمَ إِنَّ رَبَّكَ وَاسِعُ الْمَغْفِرَةِ هُوَ أَعْلَمُ بِكُمْ إِذْ أَنْشَأَكُمْ مِنَ الْأَرْضِ وَإِذْ أَنْتُمْ أَجِنَّةٌ فِي بُطُونِ أُمَّهَاتِكُمْ فَلَا تُزَكُّوا أَنْفُسَكُمْ هُوَ أَعْلَمُ بِمَنِ اتَّقَى (32) أَفَرَأَيْتَ الَّذِي تَوَلَّى (33) وَأَعْطَى قَلِيلًا وَأَكْدَى (34) أَعِنْدَهُ عِلْمُ الْغَيْبِ فَهُوَ يَرَى (35) أَمْ لَمْ يُنَبَّأْ بِمَا فِي صُحُفِ مُوسَى (36) وَإِبْرَاهِيمَ الَّذِي وَفَّى (37) أَلَّا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَى (38) وَأَنْ لَيْسَ لِلْإِنْسَانِ إِلَّا مَا سَعَى (39) وَأَنَّ سَعْيَهُ سَوْفَ يُرَى (40) ثُمَّ يُجْزَاهُ الْجَزَاءَ الْأَوْفَى (41) وَأَنَّ إِلَى رَبِّكَ الْمُنْتَهَى (42) وَأَنَّهُ هُوَ أَضْحَكَ وَأَبْكَى (43) وَأَنَّهُ هُوَ أَمَاتَ وَأَحْيَا (44) وَأَنَّهُ خَلَقَ الزَّوْجَيْنِ الذَّكَرَ وَالْأُنْثَى (45) مِنْ نُطْفَةٍ إِذَا تُمْنَى (46) وَأَنَّ عَلَيْهِ النَّشْأَةَ الْأُخْرَى (47) وَأَنَّهُ هُوَ أَغْنَى وَأَقْنَى (48) وَأَنَّهُ هُوَ رَبُّ الشِّعْرَى (49) وَأَنَّهُ أَهْلَكَ عَادًا الْأُولَى (50) وَثَمُودَ فَمَا أَبْقَى (51) وَقَوْمَ نُوحٍ مِنْ قَبْلُ إِنَّهُمْ كَانُوا هُمْ أَظْلَمَ وَأَطْغَى (52) وَالْمُؤْتَفِكَةَ أَهْوَى (53) فَغَشَّاهَا مَا غَشَّى (54) فَبِأَيِّ آَلَاءِ رَبِّكَ تَتَمَارَى (55) هَذَا نَذِيرٌ مِنَ النُّذُرِ الْأُولَى (56) أَزِفَتِ الْآَزِفَةُ (57) لَيْسَ لَهَا مِنْ دُونِ اللَّهِ كَاشِفَةٌ (58) أَفَمِنْ هَذَا الْحَدِيثِ تَعْجَبُونَ (59) وَتَضْحَكُونَ وَلَا تَبْكُونَ (60) وَأَنْتُمْ سَامِدُونَ (61) فَاسْجُدُوا لِلَّهِ وَاعْبُدُوا (62)
+  </div>
+</main>
+<footer>
+  <p class="footer-logo">Powered by <span>OneTechDev</span></p>
+</footer>
+</body>
+</html>

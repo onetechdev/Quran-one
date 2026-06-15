@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al Muddaththir · القرآن الكريم</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #0D1117;
+    --dark-2: #161B22;
+    --dark-card: #1A2233;
+    --text: #E8E8E8;
+    --text-muted: #8B9BC4;
+    --border: rgba(201,168,76,0.18);
+  }
+  body { background: var(--dark); color: var(--text); font-family: 'Poppins', sans-serif; min-height: 100vh; }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 20% 10%, rgba(46,125,82,0.10) 0%, transparent 60%), var(--dark);
+    z-index: -1;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13,17,23,0.9);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    direction: ltr;
+  }
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .nav-back:hover { gap: 12px; }
+  .nav-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  .nav-num {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .surah-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 40px 24px;
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .surah-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent 50%);
+  }
+  .surah-arabic-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    color: var(--gold);
+    display: block;
+    text-shadow: 0 0 40px rgba(201,168,76,0.25);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .surah-latin-title {
+    font-size: 1rem;
+    color: var(--text-muted);
+    direction: ltr;
+    display: block;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .surah-meaning {
+    font-size: 0.85rem;
+    color: rgba(139,155,196,0.6);
+    direction: ltr;
+    position: relative;
+  }
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px auto;
+  }
+  .surah-text {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    line-height: 2.8;
+    text-align: justify;
+    color: var(--text);
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    direction: rtl;
+    letter-spacing: 0.03em;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .footer-logo { font-size: 0.85rem; color: var(--text-muted); direction: ltr; }
+  .footer-logo span { color: var(--gold); font-weight: 600; }
+  @media (max-width: 480px) {
+    .surah-text { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+  <span class="nav-title">المدثر</span>
+  <span class="nav-num">074</span>
+</nav>
+<main>
+  <div class="surah-header">
+    <span class="surah-arabic-title">المدثر</span>
+    <div class="divider"></div>
+    <span class="surah-latin-title">Al Muddaththir</span>
+    <span class="surah-meaning">· The Cloaked One ·</span>
+  </div>
+  <div class="surah-text">
+    ﻿﻿بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ 
+يَاأَيُّهَا الْمُدَّثِّرُ (1) قُمْ فَأَنْذِرْ (2) وَرَبَّكَ فَكَبِّرْ (3) وَثِيَابَكَ فَطَهِّرْ (4) وَالرُّجْزَ فَاهْجُرْ (5) وَلَا تَمْنُنْ تَسْتَكْثِرُ (6) وَلِرَبِّكَ فَاصْبِرْ (7) فَإِذَا نُقِرَ فِي النَّاقُورِ (8) فَذَلِكَ يَوْمَئِذٍ يَوْمٌ عَسِيرٌ (9) عَلَى الْكَافِرِينَ غَيْرُ يَسِيرٍ (10) ذَرْنِي وَمَنْ خَلَقْتُ وَحِيدًا (11) وَجَعَلْتُ لَهُ مَالًا مَمْدُودًا (12)وَبَنِينَ شُهُودًا (13) وَمَهَّدْتُ لَهُ تَمْهِيدًا (14) ثُمَّ يَطْمَعُ أَنْ أَزِيدَ (15) كَلَّا إِنَّهُ كَانَ لِآَيَاتِنَا عَنِيدًا (16) سَأُرْهِقُهُ صَعُودًا (17) إِنَّهُ فَكَّرَ وَقَدَّرَ (18) فَقُتِلَ كَيْفَ قَدَّرَ (19) ثُمَّ قُتِلَ كَيْفَ قَدَّرَ (20) ثُمَّ نَظَرَ (21) ثُمَّ عَبَسَ وَبَسَرَ (22) ثُمَّ أَدْبَرَ وَاسْتَكْبَرَ (23) فَقَالَ إِنْ هَذَا إِلَّا سِحْرٌ يُؤْثَرُ (24) إِنْ هَذَا إِلَّا قَوْلُ الْبَشَرِ (25) سَأُصْلِيهِ سَقَرَ (26) وَمَا أَدْرَاكَ مَا سَقَرُ (27) لَا تُبْقِي وَلَا تَذَرُ (28) لَوَّاحَةٌ لِلْبَشَرِ (29) عَلَيْهَا تِسْعَةَ عَشَرَ (30) وَمَا جَعَلْنَا أَصْحَابَ النَّارِ إِلَّا مَلَائِكَةً وَمَا جَعَلْنَا عِدَّتَهُمْ إِلَّا فِتْنَةً لِلَّذِينَ كَفَرُوا لِيَسْتَيْقِنَ الَّذِينَ أُوتُوا الْكِتَابَ وَيَزْدَادَ الَّذِينَ آَمَنُوا إِيمَانًا وَلَا يَرْتَابَ الَّذِينَ أُوتُوا الْكِتَابَ وَالْمُؤْمِنُونَ وَلِيَقُولَ الَّذِينَ فِي قُلُوبِهِمْ مَرَضٌ وَالْكَافِرُونَ مَاذَا أَرَادَ اللَّهُ بِهَذَا مَثَلًا كَذَلِكَ يُضِلُّ اللَّهُ مَنْ يَشَاءُ وَيَهْدِي مَنْ يَشَاءُ وَمَا يَعْلَمُ جُنُودَ رَبِّكَ إِلَّا هُوَ وَمَا هِيَ إِلَّا ذِكْرَى لِلْبَشَرِ (31) كَلَّا وَالْقَمَرِ (32) وَاللَّيْلِ إِذْ أَدْبَرَ (33) وَالصُّبْحِ إِذَا أَسْفَرَ (34) إِنَّهَا لَإِحْدَى الْكُبَرِ (35) نَذِيرًا لِلْبَشَرِ (36) لِمَنْ شَاءَ مِنْكُمْ أَنْ يَتَقَدَّمَ أَوْ يَتَأَخَّرَ (37) كُلُّ نَفْسٍ بِمَا كَسَبَتْ رَهِينَةٌ (38) إِلَّا أَصْحَابَ الْيَمِينِ (39) فِي جَنَّاتٍ يَتَسَاءَلُونَ (40) عَنِ الْمُجْرِمِينَ (41) مَا سَلَكَكُمْ فِي سَقَرَ (42) قَالُوا لَمْ نَكُ مِنَ الْمُصَلِّينَ (43) وَلَمْ نَكُ نُطْعِمُ الْمِسْكِينَ (44) وَكُنَّا نَخُوضُ مَعَ الْخَائِضِينَ (45) وَكُنَّا نُكَذِّبُ بِيَوْمِ الدِّينِ (46) حَتَّى أَتَانَا الْيَقِينُ (47) فَمَا تَنْفَعُهُمْ شَفَاعَةُ الشَّافِعِينَ (48) فَمَا لَهُمْ عَنِ التَّذْكِرَةِ مُعْرِضِينَ (49) كَأَنَّهُمْ حُمُرٌ مُسْتَنْفِرَةٌ (50) فَرَّتْ مِنْ قَسْوَرَةٍ (51) بَلْ يُرِيدُ كُلُّ امْرِئٍ مِنْهُمْ أَنْ يُؤْتَى صُحُفًا مُنَشَّرَةً (52) كَلَّا بَلْ لَا يَخَافُونَ الْآَخِرَةَ (53) كَلَّا إِنَّهُ تَذْكِرَةٌ (54) فَمَنْ شَاءَ ذَكَرَهُ (55) وَمَا يَذْكُرُونَ إِلَّا أَنْ يَشَاءَ اللَّهُ هُوَ أَهْلُ التَّقْوَى وَأَهْلُ الْمَغْفِرَةِ (56)
+  </div>
+</main>
+<footer>
+  <p class="footer-logo">Powered by <span>OneTechDev</span></p>
+</footer>
+</body>
+</html>

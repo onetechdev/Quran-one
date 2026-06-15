@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quran Reader · القرآن الكريم</title>
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#C9A84C">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Quran">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="description" content="Holy Quran - All 114 Surahs with Audio and Synchronized Reading">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --dark: #0D1117;
+  --dark-2: #161B22;
+  --dark-3: #1C2430;
+  --card: #151D2B;
+  --card2: #1A2438;
+  --green: #2E7D52;
+  --green-light: #3EA86A;
+  --text: #E8EAF0;
+  --text-muted: #7A8BAA;
+  --border: rgba(201,168,76,0.15);
+  --highlight-bg: rgba(201,168,76,0.12);
+  --highlight-border: rgba(201,168,76,0.6);
+  --highlight-text: #F5E6C0;
+  --active-glow: 0 0 24px rgba(201,168,76,0.25);
+  --radius: 16px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 40% at 15% 5%, rgba(46,125,82,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 30% at 85% 95%, rgba(201,168,76,0.07) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── TOP NAV ─── */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(13,17,23,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  direction: ltr;
+}
+
+.nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+.nav-back:hover { opacity: 0.75; }
+
+.surah-select-wrap {
+  flex: 1;
+  max-width: 320px;
+}
+
+.surah-select {
+  width: 100%;
+  background: var(--dark-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: 'Poppins', sans-serif;
+  padding: 8px 12px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.surah-select:focus { border-color: var(--gold); }
+
+.nav-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-left: auto;
+  direction: rtl;
+}
+
+/* ─── MAIN LAYOUT ─── */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 57px);
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--border);
+  background: var(--dark-2);
+  overflow-y: auto;
+  position: sticky;
+  top: 57px;
+  height: calc(100vh - 57px);
+  direction: ltr;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-head {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.verse-index {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.vi-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+}
+.vi-item:hover { background: rgba(255,255,255,0.04); }
+.vi-item.active {
+  background: var(--highlight-bg);
+  border-color: var(--highlight-border);
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.vi-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.vi-item.active .vi-num {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.vi-preview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: rtl;
+  font-family: 'Amiri', serif;
+  font-size: 0.95rem;
+}
+
+/* ─── READER AREA ─── */
+.reader-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── SURAH HERO ─── */
+.surah-hero {
+  text-align: center;
+  padding: 40px 24px 32px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(201,168,76,0.04) 0%, transparent 100%);
+}
+
+.hero-arabic {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2.2rem, 7vw, 3.8rem);
+  color: var(--gold);
+  text-shadow: 0 0 40px rgba(201,168,76,0.2);
+  display: block;
+  line-height: 1.1;
+}
+
+.hero-latin {
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-top: 8px;
+  font-weight: 500;
+  direction: ltr;
+}
+
+.hero-meaning {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+  direction: ltr;
+}
+
+.hero-divider {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 16px auto;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  direction: ltr;
+  flex-wrap: wrap;
+}
+
+.hero-badge {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hero-badge strong {
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+
+/* ─── VERSES AREA ─── */
+.verses-area {
+  flex: 1;
+  padding: 32px 28px 200px;
+  max-width: 820px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.verse-block {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 12px;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  background: var(--card);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  scroll-margin-top: 80px;
+}
+
+.verse-block:hover {
+  border-color: rgba(201,168,76,0.2);
+  background: var(--card2);
+}
+
+.verse-block.active {
+  border-color: var(--highlight-border);
+  background: var(--highlight-bg);
+  box-shadow: var(--active-glow);
+}
+
+.verse-block.active .verse-text {
+  color: var(--highlight-text);
+}
+
+.verse-num-badge {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-top: 4px;
+  transition: all 0.3s;
+  direction: ltr;
+}
+
+.verse-block.active .verse-num-badge {
+  background: var(--gold);
+  color: var(--dark);
+  border-color: var(--gold);
+}
+
+.verse-text {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.45rem, 3.5vw, 2rem);
+  line-height: 2.2;
+  color: var(--text);
+  text-align: right;
+  direction: rtl;
+  flex: 1;
+  transition: color 0.3s;
+}
+
+.verse-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--gold);
+  border-radius: 0 3px 3px 0;
+  transition: height 0.3s ease;
+}
+
+.verse-block.active .verse-indicator {
+  height: 60%;
+}
+
+/* ─── AUDIO PLAYER ─── */
+.player-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  background: rgba(13,17,23,0.96);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding: 14px 24px 18px;
+  direction: ltr;
+}
+
+.player-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Verse label above progress */
+.now-playing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 12px;
+}
+
+.np-verse {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.np-arabic {
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  direction: rtl;
+  text-align: right;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Progress bar */
+.progress-wrap {
+  position: relative;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.25s linear;
+  pointer-events: none;
+}
+
+.progress-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  left: 0%;
+  box-shadow: 0 0 8px rgba(201,168,76,0.5);
+  pointer-events: none;
+  transition: left 0.25s linear;
+}
+
+/* Controls row */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.ctrl-btn:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+.ctrl-btn.active { color: var(--gold); }
+
+.play-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-light), var(--green));
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(46,125,82,0.4);
+  transition: transform 0.15s, box-shadow 0.15s;
+  flex-shrink: 0;
+}
+.play-btn:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(46,125,82,0.55); }
+.play-btn:active { transform: scale(0.97); }
+
+.time-display {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  min-width: 80px;
+}
+
+.speed-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.speed-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+.vol-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.vol-slider {
+  width: 80px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+/* Auto-scroll toggle */
+.autoscroll-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.autoscroll-btn.on { color: var(--gold); border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.08); }
+
+/* hidden real audio */
+#realAudio { display: none; }
+
+/* ─── LOADING ─── */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--dark);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.loading-title {
+  font-family: 'Amiri', serif;
+  font-size: 2rem;
+  color: var(--gold);
+}
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(201,168,76,0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .verses-area { padding: 20px 16px 200px; }
+  .vol-wrap { display: none; }
+  .autoscroll-btn span { display: none; }
+  .speed-btn { display: none; }
+  .topnav { gap: 8px; }
+  .nav-title { display: none; }
+}
+
+@media (max-width: 480px) {
+  .verse-text { font-size: 1.35rem; }
+  .player-dock { padding: 12px 16px 16px; }
+  .controls { gap: 10px; }
+}
+
+/* ─── FOOTER ─── */
+.reader-footer {
+  text-align: center;
+  padding: 20px;
+  direction: ltr;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.reader-footer span { color: var(--gold); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-title">القرآن الكريم</div>
+  <div class="spinner"></div>
+  <p style="color:var(--text-muted);font-size:0.85rem;">Loading Quran data...</p>
+</div>
+
+<!-- Top Nav -->
+<nav class="topnav">
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Home
+  </a>
+  <div class="surah-select-wrap">
+    <select class="surah-select" id="surahSelect" onchange="loadSurah(parseInt(this.value))"></select>
+  </div>
+  <span class="nav-title" id="navTitle">القرآن الكريم</span>
+</nav>
+
+<div class="layout">
+  <!-- Sidebar verse index -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">Verses</div>
+    <div class="verse-index" id="verseIndex"></div>
+  </aside>
+
+  <!-- Main reader -->
+  <div class="reader-wrap">
+    <!-- Surah hero -->
+    <div class="surah-hero" id="surahHero">
+      <span class="hero-arabic" id="heroArabic">—</span>
+      <div class="hero-divider"></div>
+      <div class="hero-latin" id="heroLatin">Select a Surah</div>
+      <div class="hero-meaning" id="heroMeaning"></div>
+      <div class="hero-meta" id="heroMeta"></div>
+    </div>
+
+    <!-- Verses -->
+    <div class="verses-area" id="versesArea"></div>
+
+    <div class="reader-footer">Powered by <span>OneTechDev</span></div>
+  </div>
+</div>
+
+<!-- Audio Player Dock -->
+<div class="player-dock" id="playerDock">
+  <div class="player-inner">
+    <div class="now-playing">
+      <span class="np-verse" id="npVerse">No surah loaded</span>
+      <span class="np-arabic" id="npArabic"></span>
+    </div>
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-fill" id="progressFill"></div>
+      <div class="progress-thumb" id="progressThumb"></div>
+    </div>
+    <div class="controls">
+      <!-- Prev verse -->
+      <button class="ctrl-btn" onclick="jumpVerse(-1)" title="Previous verse">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="19 20 9 12 19 4"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+      </button>
+      <!-- Play/Pause -->
+      <button class="play-btn" id="playBtn" onclick="togglePlay()">
+        <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      <!-- Next verse -->
+      <button class="ctrl-btn" onclick="jumpVerse(1)" title="Next verse">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5 4 15 12 5 20"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+      </button>
+      <!-- Time -->
+      <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+      <!-- Speed -->
+      <button class="speed-btn" id="speedBtn" onclick="cycleSpeed()">1×</button>
+      <!-- Auto-scroll -->
+      <button class="autoscroll-btn on" id="autoScrollBtn" onclick="toggleAutoScroll()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        <span>Auto-scroll</span>
+      </button>
+      <!-- Volume -->
+      <div class="vol-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-muted)"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <input class="vol-slider" type="range" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)">
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="realAudio" preload="auto"></audio>
+
+<script>
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
+let QURAN = {};
+let currentSurah = 1;
+let currentVerse = 0;       // 0-based index
+let isPlaying = false;
+let autoScroll = true;
+let verseTimings = [];      // [{start, end}] per verse
+let speeds = [0.75, 1, 1.25, 1.5];
+let speedIdx = 1;
+
+const audio = document.getElementById('realAudio');
+
+// ═══════════════════════════════════════════
+//  BOOT: load JSON
+// ═══════════════════════════════════════════
+fetch('quran_data.json')
+  .then(r => r.json())
+  .then(data => {
+    QURAN = data;
+    buildSelect();
+    const params = new URLSearchParams(location.search);
+    const s = parseInt(params.get('s')) || 1;
+    loadSurah(s);
+    document.getElementById('loadingScreen').style.display = 'none';
+  })
+  .catch(e => {
+    document.getElementById('loadingScreen').innerHTML =
+      '<div style="color:#ff6b6b;font-family:Poppins;text-align:center;padding:40px">' +
+      '<div style="font-size:1.5rem;margin-bottom:12px">⚠ Error loading data</div>' +
+      '<div style="font-size:0.9rem;color:#888">Make sure quran_data.json is in the same folder as this file.</div></div>';
+  });
+
+// ═══════════════════════════════════════════
+//  BUILD SELECT DROPDOWN
+// ═══════════════════════════════════════════
+function buildSelect() {
+  const sel = document.getElementById('surahSelect');
+  for (let i = 1; i <= 114; i++) {
+    const s = QURAN[String(i)];
+    if (!s) continue;
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${i}. ${s.latin} · ${s.arabic}`;
+    sel.appendChild(opt);
+  }
+}
+
+// ═══════════════════════════════════════════
+//  LOAD SURAH
+// ═══════════════════════════════════════════
+function loadSurah(num) {
+  const s = QURAN[String(num)];
+  if (!s) return;
+
+  currentSurah = num;
+  currentVerse = 0;
+  isPlaying = false;
+  updatePlayIcon();
+
+  // Update select
+  document.getElementById('surahSelect').value = num;
+  document.getElementById('navTitle').textContent = s.arabic;
+
+  // Hero
+  document.getElementById('heroArabic').textContent = s.arabic;
+  document.getElementById('heroLatin').textContent = s.latin;
+  document.getElementById('heroMeaning').textContent = '· ' + s.meaning + ' ·';
+  document.getElementById('heroMeta').innerHTML =
+    `<div class="hero-badge"><strong>${s.verses.length}</strong> verses</div>
+     <div class="hero-badge">Surah <strong>${num}</strong> of 114</div>`;
+
+  // Render verses
+  renderVerses(s);
+
+  // Sidebar index
+  renderSidebarIndex(s);
+
+  // Load audio
+  audio.src = s.audio;
+  audio.load();
+
+  // Now playing
+  document.getElementById('npVerse').textContent = `Surah ${num} · ${s.latin}`;
+  updateNowPlaying();
+
+  // URL update
+  history.replaceState({}, '', `?s=${num}`);
+}
+
+// ═══════════════════════════════════════════
+//  RENDER VERSES
+// ═══════════════════════════════════════════
+function renderVerses(s) {
+  const area = document.getElementById('versesArea');
+  area.innerHTML = '';
+  s.verses.forEach((text, i) => {
+    const div = document.createElement('div');
+    div.className = 'verse-block' + (i === 0 ? ' active' : '');
+    div.id = `v${i}`;
+    div.dataset.idx = i;
+    div.onclick = () => seekToVerse(i);
+    div.innerHTML = `
+      <div class="verse-indicator"></div>
+      <div class="verse-num-badge">${i + 1}</div>
+      <div class="verse-text">${text}</div>
+    `;
+    area.appendChild(div);
+  });
+}
+
+// ═══════════════════════════════════════════
+//  SIDEBAR INDEX
+// ═══════════════════════════════════════════
+function renderSidebarIndex(s) {
+  const idx = document.getElementById('verseIndex');
+  idx.innerHTML = '';
+  s.verses.forEach((text, i) => {
+    const div = document.createElement('div');
+    div.className = 'vi-item' + (i === 0 ? ' active' : '');
+    div.id = `vi${i}`;
+    div.onclick = () => seekToVerse(i);
+    div.innerHTML = `
+      <div class="vi-num">${i + 1}</div>
+      <div class="vi-preview">${text.substring(0, 30)}</div>
+    `;
+    idx.appendChild(div);
+  });
+}
+
+// ═══════════════════════════════════════════
+//  COMPUTE VERSE TIMINGS
+// ═══════════════════════════════════════════
+function computeTimings(duration) {
+  const s = QURAN[String(currentSurah)];
+  if (!s) return;
+  const n = s.verses.length;
+  const perVerse = duration / n;
+  verseTimings = [];
+  for (let i = 0; i < n; i++) {
+    verseTimings.push({ start: i * perVerse, end: (i + 1) * perVerse });
+  }
+}
+
+// ═══════════════════════════════════════════
+//  AUDIO EVENTS
+// ═══════════════════════════════════════════
+audio.addEventListener('loadedmetadata', () => {
+  computeTimings(audio.duration);
+  updateTimeDisplay();
+});
+
+audio.addEventListener('timeupdate', () => {
+  if (!audio.duration) return;
+  const t = audio.currentTime;
+  const pct = (t / audio.duration) * 100;
+
+  // Progress bar
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressThumb').style.left = pct + '%';
+  updateTimeDisplay();
+
+  // Find active verse
+  const idx = verseTimings.findIndex(v => t >= v.start && t < v.end);
+  if (idx !== -1 && idx !== currentVerse) {
+    activateVerse(idx);
+  }
+});
+
+audio.addEventListener('ended', () => {
+  isPlaying = false;
+  updatePlayIcon();
+});
+
+audio.addEventListener('play', () => { isPlaying = true; updatePlayIcon(); });
+audio.addEventListener('pause', () => { isPlaying = false; updatePlayIcon(); });
+
+// Progress bar click / drag
+const progressWrap = document.getElementById('progressWrap');
+let dragging = false;
+
+function seekFromEvent(e) {
+  const rect = progressWrap.getBoundingClientRect();
+  const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+  const pct = Math.max(0, Math.min(1, x / rect.width));
+  audio.currentTime = pct * audio.duration;
+}
+
+progressWrap.addEventListener('mousedown', e => { dragging = true; seekFromEvent(e); });
+progressWrap.addEventListener('touchstart', e => { dragging = true; seekFromEvent(e); }, { passive: true });
+window.addEventListener('mousemove', e => { if (dragging) seekFromEvent(e); });
+window.addEventListener('touchmove', e => { if (dragging) seekFromEvent(e); }, { passive: true });
+window.addEventListener('mouseup', () => dragging = false);
+window.addEventListener('touchend', () => dragging = false);
+
+// ═══════════════════════════════════════════
+//  ACTIVATE VERSE
+// ═══════════════════════════════════════════
+function activateVerse(idx) {
+  // Remove old
+  const old = document.getElementById(`v${currentVerse}`);
+  if (old) old.classList.remove('active');
+  const oldVi = document.getElementById(`vi${currentVerse}`);
+  if (oldVi) oldVi.classList.remove('active');
+
+  currentVerse = idx;
+
+  // Add new
+  const el = document.getElementById(`v${idx}`);
+  if (el) {
+    el.classList.add('active');
+    if (autoScroll) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+  const viEl = document.getElementById(`vi${idx}`);
+  if (viEl) {
+    viEl.classList.add('active');
+    viEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  updateNowPlaying();
+}
+
+function updateNowPlaying() {
+  const s = QURAN[String(currentSurah)];
+  if (!s) return;
+  document.getElementById('npVerse').textContent = `Surah ${currentSurah} · Verse ${currentVerse + 1} of ${s.verses.length}`;
+  document.getElementById('npArabic').textContent = s.verses[currentVerse] || '';
+}
+
+// ═══════════════════════════════════════════
+//  CONTROLS
+// ═══════════════════════════════════════════
+function togglePlay() {
+  if (!audio.src) return;
+  if (audio.paused) {
+    // If not yet loaded / at end, restart
+    if (audio.ended) audio.currentTime = 0;
+    audio.play().catch(() => {});
+  } else {
+    audio.pause();
+  }
+}
+
+function updatePlayIcon() {
+  const icon = document.getElementById('playIcon');
+  if (isPlaying) {
+    icon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  } else {
+    icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+  }
+}
+
+function jumpVerse(dir) {
+  const s = QURAN[String(currentSurah)];
+  if (!s) return;
+  const next = Math.max(0, Math.min(s.verses.length - 1, currentVerse + dir));
+  seekToVerse(next);
+}
+
+function seekToVerse(idx) {
+  if (!verseTimings[idx]) return;
+  audio.currentTime = verseTimings[idx].start + 0.05;
+  activateVerse(idx);
+  if (audio.paused) audio.play().catch(() => {});
+}
+
+function cycleSpeed() {
+  speedIdx = (speedIdx + 1) % speeds.length;
+  audio.playbackRate = speeds[speedIdx];
+  document.getElementById('speedBtn').textContent = speeds[speedIdx] + '×';
+}
+
+function setVolume(v) {
+  audio.volume = parseFloat(v);
+}
+
+function toggleAutoScroll() {
+  autoScroll = !autoScroll;
+  const btn = document.getElementById('autoScrollBtn');
+  btn.classList.toggle('on', autoScroll);
+}
+
+function updateTimeDisplay() {
+  const cur = formatTime(audio.currentTime || 0);
+  const dur = formatTime(audio.duration || 0);
+  document.getElementById('timeDisplay').textContent = `${cur} / ${dur}`;
+}
+
+function formatTime(s) {
+  if (isNaN(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
+// ─── Keyboard shortcuts ───
+window.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+  if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+  if (e.code === 'ArrowRight') audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+  if (e.code === 'ArrowLeft') audio.currentTime = Math.max(0, audio.currentTime - 5);
+  if (e.code === 'ArrowUp') jumpVerse(-1);
+  if (e.code === 'ArrowDown') jumpVerse(1);
+});
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('[PWA] SW registered:', reg.scope))
+      .catch(err => console.warn('[PWA] SW failed:', err));
+  });
+}
+</script>
+</body>
+</html>

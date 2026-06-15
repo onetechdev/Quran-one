@@ -1,0 +1,84 @@
+{
+  "name": "القرآن الكريم - Holy Quran",
+  "short_name": "Quran",
+  "description": "Holy Quran App - All 114 Surahs with Audio by OneTechDev",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0D1117",
+  "theme_color": "#C9A84C",
+  "orientation": "portrait-primary",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["education", "religion"],
+  "icons": [
+    {
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Al Fatihah",
+      "short_name": "Fatihah",
+      "description": "Open Surah Al Fatihah",
+      "url": "./reader.html?s=1"
+    },
+    {
+      "name": "Al Kahf",
+      "short_name": "Kahf",
+      "description": "Open Surah Al Kahf",
+      "url": "./reader.html?s=18"
+    },
+    {
+      "name": "Yasin",
+      "short_name": "Yasin",
+      "description": "Open Surah Ya Seen",
+      "url": "./reader.html?s=36"
+    }
+  ]
+}

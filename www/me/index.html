@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>القرآن الكريم | Holy Quran</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #0D1117;
+    --dark-2: #161B22;
+    --dark-3: #1C2430;
+    --dark-card: #1A2233;
+    --green: #2E7D52;
+    --green-light: #4CAF7A;
+    --text: #E8E8E8;
+    --text-muted: #8B9BC4;
+    --border: rgba(201, 168, 76, 0.18);
+  }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* STARFIELD BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(46,125,82,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 90%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      var(--dark);
+    z-index: -1;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 48px 20px 32px;
+    position: relative;
+  }
+
+  .bismillah {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    color: var(--gold);
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+    text-shadow: 0 0 30px rgba(201,168,76,0.3);
+  }
+
+  .header-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2rem, 7vw, 3.8rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), #A07830);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .header-sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    direction: ltr;
+  }
+
+  .divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px auto;
+  }
+
+  /* AUDIO BUTTON */
+  .audio-btn-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 36px;
+  }
+
+  .audio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--green), #1A5C38);
+    border: 1px solid rgba(76,175,122,0.35);
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    direction: ltr;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(46,125,82,0.35);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .audio-btn:hover {
+    background: linear-gradient(135deg, var(--green-light), var(--green));
+    box-shadow: 0 6px 28px rgba(46,125,82,0.5);
+    transform: translateY(-2px);
+  }
+
+  .audio-btn svg { flex-shrink: 0; }
+
+  /* SEARCH */
+  .search-wrap {
+    max-width: 480px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+    direction: ltr;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--dark-2);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 12px 24px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .search-input:focus { border-color: var(--gold); }
+  .search-input::placeholder { color: var(--text-muted); }
+
+  /* STATS BAR */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    direction: ltr;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-num {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* GRID */
+  .grid-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+  }
+
+  .surah-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  /* CARD */
+  .surah-card {
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .surah-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .surah-card:hover {
+    border-color: rgba(201,168,76,0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.1);
+  }
+
+  .surah-card:hover::before { opacity: 1; }
+
+  .surah-num {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.18), rgba(201,168,76,0.06));
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold);
+    direction: ltr;
+  }
+
+  .surah-info {
+    flex: 1;
+    min-width: 0;
+    direction: rtl;
+    text-align: right;
+  }
+
+  .surah-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    line-height: 1.3;
+    display: block;
+  }
+
+  .surah-latin {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    direction: ltr;
+    text-align: left;
+    margin-top: 2px;
+    display: block;
+  }
+
+  .surah-arrow {
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .surah-card:hover .surah-arrow {
+    opacity: 1;
+    transform: translateX(-4px);
+  }
+
+  /* HIDDEN FILTER */
+  .surah-card.hidden { display: none; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .footer-logo {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    direction: ltr;
+  }
+
+  .footer-logo span {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(139,155,196,0.5);
+    margin-top: 6px;
+    direction: ltr;
+  }
+
+  @media (max-width: 480px) {
+    .surah-grid { grid-template-columns: 1fr; }
+    .stats { gap: 24px; }
+  }
+
+.share-btn{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    margin:10px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  
+  <button onclick="shareApp()" class="share-btn">
+📤 Share App
+</button>
+  <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+  <div class="divider"></div>
+  <h1 class="header-title">القرآن الكريم</h1>
+  <p class="header-sub">The Holy Quran · 114 Surahs</p>
+</header>
+
+
+
+<div class="stats">
+  <div class="stat-item"><span class="stat-num">114</span><span class="stat-label">Surahs</span></div>
+  <div class="stat-item"><span class="stat-num">6,236</span><span class="stat-label">Verses</span></div>
+  <div class="stat-item"><span class="stat-num">30</span><span class="stat-label">Juz</span></div>
+</div>
+
+<div class="search-wrap">
+  <input class="search-input" type="text" placeholder="Search surah name..." oninput="filterSurahs(this.value)">
+</div>
+
+<div class="grid-wrap">
+  <div class="surah-grid" id="surahGrid">
+    <a class="surah-card" href="1.html"><div class="surah-num">1</div><div class="surah-info"><span class="surah-arabic">الفاتحة</span><span class="surah-latin">Al Fatihah · The Opening</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="2.html"><div class="surah-num">2</div><div class="surah-info"><span class="surah-arabic">البقرة</span><span class="surah-latin">Al Baqarah · The Cow</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="3.html"><div class="surah-num">3</div><div class="surah-info"><span class="surah-arabic">آل عمران</span><span class="surah-latin">Aal Imran · Family of Imran</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="4.html"><div class="surah-num">4</div><div class="surah-info"><span class="surah-arabic">النساء</span><span class="surah-latin">An Nisa · The Women</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="5.html"><div class="surah-num">5</div><div class="surah-info"><span class="surah-arabic">المائدة</span><span class="surah-latin">Al Ma'idah · The Table</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="6.html"><div class="surah-num">6</div><div class="surah-info"><span class="surah-arabic">الأنعام</span><span class="surah-latin">Al Anam · The Cattle</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="7.html"><div class="surah-num">7</div><div class="surah-info"><span class="surah-arabic">الأعراف</span><span class="surah-latin">Al Araf · The Heights</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="8.html"><div class="surah-num">8</div><div class="surah-info"><span class="surah-arabic">الأنفال</span><span class="surah-latin">Al Anfal · The Spoils of War</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="9.html"><div class="surah-num">9</div><div class="surah-info"><span class="surah-arabic">التوبة</span><span class="surah-latin">At Taubah · The Repentance</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="10.html"><div class="surah-num">10</div><div class="surah-info"><span class="surah-arabic">يونس</span><span class="surah-latin">Yunus · Jonah</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="11.html"><div class="surah-num">11</div><div class="surah-info"><span class="surah-arabic">هود</span><span class="surah-latin">Hud · Hud</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="12.html"><div class="surah-num">12</div><div class="surah-info"><span class="surah-arabic">يوسف</span><span class="surah-latin">Yusuf · Joseph</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="13.html"><div class="surah-num">13</div><div class="surah-info"><span class="surah-arabic">الرّعد</span><span class="surah-latin">Ar Raad · The Thunder</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="14.html"><div class="surah-num">14</div><div class="surah-info"><span class="surah-arabic">إبراهيم</span><span class="surah-latin">Ibrahim · Abraham</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="15.html"><div class="surah-num">15</div><div class="surah-info"><span class="surah-arabic">الحجر</span><span class="surah-latin">Al Hijr · The Rocky Tract</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="16.html"><div class="surah-num">16</div><div class="surah-info"><span class="surah-arabic">النحل</span><span class="surah-latin">An Nahl · The Bee</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="17.html"><div class="surah-num">17</div><div class="surah-info"><span class="surah-arabic">الإسراء</span><span class="surah-latin">Al Isra · The Night Journey</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="18.html"><div class="surah-num">18</div><div class="surah-info"><span class="surah-arabic">الكهف</span><span class="surah-latin">Al Kahf · The Cave</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="19.html"><div class="surah-num">19</div><div class="surah-info"><span class="surah-arabic">مريم</span><span class="surah-latin">Maryam · Mary</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="20.html"><div class="surah-num">20</div><div class="surah-info"><span class="surah-arabic">طه</span><span class="surah-latin">Ta Ha · Ta Ha</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="21.html"><div class="surah-num">21</div><div class="surah-info"><span class="surah-arabic">الأنبياء</span><span class="surah-latin">Al Anbiya · The Prophets</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="22.html"><div class="surah-num">22</div><div class="surah-info"><span class="surah-arabic">الحج</span><span class="surah-latin">Al Hajj · The Pilgrimage</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="23.html"><div class="surah-num">23</div><div class="surah-info"><span class="surah-arabic">المؤمنون</span><span class="surah-latin">Al Mu'minun · The Believers</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="24.html"><div class="surah-num">24</div><div class="surah-info"><span class="surah-arabic">النّور</span><span class="surah-latin">An Nur · The Light</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="25.html"><div class="surah-num">25</div><div class="surah-info"><span class="surah-arabic">الفرقان</span><span class="surah-latin">Al Furqan · The Criterion</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="26.html"><div class="surah-num">26</div><div class="surah-info"><span class="surah-arabic">الشعراء</span><span class="surah-latin">Ash Shu'ara · The Poets</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="27.html"><div class="surah-num">27</div><div class="surah-info"><span class="surah-arabic">النمل</span><span class="surah-latin">An Naml · The Ant</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="28.html"><div class="surah-num">28</div><div class="surah-info"><span class="surah-arabic">القصص</span><span class="surah-latin">Al Qasas · The Stories</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="29.html"><div class="surah-num">29</div><div class="surah-info"><span class="surah-arabic">العنكبوت</span><span class="surah-latin">Al Ankabut · The Spider</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="30.html"><div class="surah-num">30</div><div class="surah-info"><span class="surah-arabic">الروم</span><span class="surah-latin">Ar Rum · The Romans</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="31.html"><div class="surah-num">31</div><div class="surah-info"><span class="surah-arabic">لقمان</span><span class="surah-latin">Luqman · Luqman</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="32.html"><div class="surah-num">32</div><div class="surah-info"><span class="surah-arabic">السجدة</span><span class="surah-latin">As Sajdah · The Prostration</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="33.html"><div class="surah-num">33</div><div class="surah-info"><span class="surah-arabic">الأحزاب</span><span class="surah-latin">Al Ahzab · The Combined Forces</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="34.html"><div class="surah-num">34</div><div class="surah-info"><span class="surah-arabic">سبإ</span><span class="surah-latin">Saba · Sheba</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="35.html"><div class="surah-num">35</div><div class="surah-info"><span class="surah-arabic">فاطر</span><span class="surah-latin">Fatir · Originator</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="36.html"><div class="surah-num">36</div><div class="surah-info"><span class="surah-arabic">يس</span><span class="surah-latin">Ya Seen · Ya Seen</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="37.html"><div class="surah-num">37</div><div class="surah-info"><span class="surah-arabic">الصّافّات</span><span class="surah-latin">As Saaffat · Those in Ranks</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="38.html"><div class="surah-num">38</div><div class="surah-info"><span class="surah-arabic">ص</span><span class="surah-latin">Sad · The Letter Saad</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="39.html"><div class="surah-num">39</div><div class="surah-info"><span class="surah-arabic">الزمر</span><span class="surah-latin">Az Zumar · The Troops</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="40.html"><div class="surah-num">40</div><div class="surah-info"><span class="surah-arabic">غافر</span><span class="surah-latin">Ghafir · The Forgiver</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="41.html"><div class="surah-num">41</div><div class="surah-info"><span class="surah-arabic">فصّلت</span><span class="surah-latin">Fussilat · Explained in Detail</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="42.html"><div class="surah-num">42</div><div class="surah-info"><span class="surah-arabic">الشورى</span><span class="surah-latin">Ash Shura · The Consultation</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="43.html"><div class="surah-num">43</div><div class="surah-info"><span class="surah-arabic">الزخرف</span><span class="surah-latin">Az Zukhruf · Ornaments of Gold</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="44.html"><div class="surah-num">44</div><div class="surah-info"><span class="surah-arabic">الدخان</span><span class="surah-latin">Ad Dukhan · The Smoke</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="45.html"><div class="surah-num">45</div><div class="surah-info"><span class="surah-arabic">الجاثية</span><span class="surah-latin">Al Jathiyah · The Crouching</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="46.html"><div class="surah-num">46</div><div class="surah-info"><span class="surah-arabic">الأحقاف</span><span class="surah-latin">Al Ahqaf · The Wind-Curved Sandhills</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="47.html"><div class="surah-num">47</div><div class="surah-info"><span class="surah-arabic">محمّـد</span><span class="surah-latin">Muhammad · Muhammad</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="48.html"><div class="surah-num">48</div><div class="surah-info"><span class="surah-arabic">الفتح</span><span class="surah-latin">Al Fath · The Victory</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="49.html"><div class="surah-num">49</div><div class="surah-info"><span class="surah-arabic">الحُـجُـرات</span><span class="surah-latin">Al Hujurat · The Rooms</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="50.html"><div class="surah-num">50</div><div class="surah-info"><span class="surah-arabic">ق</span><span class="surah-latin">Qaf · The Letter Qaaf</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="51.html"><div class="surah-num">51</div><div class="surah-info"><span class="surah-arabic">الذاريات</span><span class="surah-latin">Az Zariyat · The Winnowing Winds</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="52.html"><div class="surah-num">52</div><div class="surah-info"><span class="surah-arabic">الـطور</span><span class="surah-latin">At Tur · The Mount</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="53.html"><div class="surah-num">53</div><div class="surah-info"><span class="surah-arabic">الـنجـم</span><span class="surah-latin">An Najm · The Star</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="54.html"><div class="surah-num">54</div><div class="surah-info"><span class="surah-arabic">الـقمـر</span><span class="surah-latin">Al Qamar · The Moon</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="55.html"><div class="surah-num">55</div><div class="surah-info"><span class="surah-arabic">الـرحـمـن</span><span class="surah-latin">Ar Rahman · The Beneficent</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="56.html"><div class="surah-num">56</div><div class="surah-info"><span class="surah-arabic">الواقيـة</span><span class="surah-latin">Al Waqi'ah · The Inevitable</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="57.html"><div class="surah-num">57</div><div class="surah-info"><span class="surah-arabic">الحـديد</span><span class="surah-latin">Al Hadid · The Iron</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="58.html"><div class="surah-num">58</div><div class="surah-info"><span class="surah-arabic">الـمجادلـة</span><span class="surah-latin">Al Mujadilah · The Pleading Woman</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="59.html"><div class="surah-num">59</div><div class="surah-info"><span class="surah-arabic">الـحـشـر</span><span class="surah-latin">Al Hashr · The Exile</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="60.html"><div class="surah-num">60</div><div class="surah-info"><span class="surah-arabic">الـمـمـتـحنة</span><span class="surah-latin">Al Mumtahanah · She That Is Examined</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="61.html"><div class="surah-num">61</div><div class="surah-info"><span class="surah-arabic">الـصّـف</span><span class="surah-latin">As Saf · The Ranks</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="62.html"><div class="surah-num">62</div><div class="surah-info"><span class="surah-arabic">الـجـمـعـة</span><span class="surah-latin">Al Jumu'ah · The Friday</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="63.html"><div class="surah-num">63</div><div class="surah-info"><span class="surah-arabic">الـمنافقون</span><span class="surah-latin">Al Munafiqun · The Hypocrites</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="64.html"><div class="surah-num">64</div><div class="surah-info"><span class="surah-arabic">الـتغابن</span><span class="surah-latin">At Taghabun · The Mutual Disillusion</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="65.html"><div class="surah-num">65</div><div class="surah-info"><span class="surah-arabic">الـطلاق</span><span class="surah-latin">At Talaq · The Divorce</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="66.html"><div class="surah-num">66</div><div class="surah-info"><span class="surah-arabic">الـتحريم</span><span class="surah-latin">At Tahrim · The Prohibition</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="67.html"><div class="surah-num">67</div><div class="surah-info"><span class="surah-arabic">الـملك</span><span class="surah-latin">Al Mulk · The Dominion</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="68.html"><div class="surah-num">68</div><div class="surah-info"><span class="surah-arabic">الـقـلـم</span><span class="surah-latin">Al Qalam · The Pen</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="69.html"><div class="surah-num">69</div><div class="surah-info"><span class="surah-arabic">الـحاقّـة</span><span class="surah-latin">Al Haqqah · The Reality</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="70.html"><div class="surah-num">70</div><div class="surah-info"><span class="surah-arabic">الـمعارج</span><span class="surah-latin">Al Ma'arij · The Ascending Stairways</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="71.html"><div class="surah-num">71</div><div class="surah-info"><span class="surah-arabic">نوح</span><span class="surah-latin">Nuh · Noah</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="72.html"><div class="surah-num">72</div><div class="surah-info"><span class="surah-arabic">الجن</span><span class="surah-latin">Al Jinn · The Jinn</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="73.html"><div class="surah-num">73</div><div class="surah-info"><span class="surah-arabic">الـمـزّمّـل</span><span class="surah-latin">Al Muzzammil · The Enshrouded One</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="74.html"><div class="surah-num">74</div><div class="surah-info"><span class="surah-arabic">الـمّـدّثّـر</span><span class="surah-latin">Al Muddaththir · The Cloaked One</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="75.html"><div class="surah-num">75</div><div class="surah-info"><span class="surah-arabic">الـقـيامـة</span><span class="surah-latin">Al Qiyamah · The Resurrection</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="76.html"><div class="surah-num">76</div><div class="surah-info"><span class="surah-arabic">الإنسان</span><span class="surah-latin">Al Insan · The Man</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="77.html"><div class="surah-num">77</div><div class="surah-info"><span class="surah-arabic">الـمرسلات</span><span class="surah-latin">Al Mursalat · The Emissaries</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="78.html"><div class="surah-num">78</div><div class="surah-info"><span class="surah-arabic">الـنبإ</span><span class="surah-latin">An Naba · The Tidings</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="79.html"><div class="surah-num">79</div><div class="surah-info"><span class="surah-arabic">الـنازعات</span><span class="surah-latin">An Nazi'at · Those Who Drag Forth</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="80.html"><div class="surah-num">80</div><div class="surah-info"><span class="surah-arabic">عبس</span><span class="surah-latin">Abasa · He Frowned</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="81.html"><div class="surah-num">81</div><div class="surah-info"><span class="surah-arabic">التكوير</span><span class="surah-latin">At Takwir · The Overthrowing</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="82.html"><div class="surah-num">82</div><div class="surah-info"><span class="surah-arabic">الانفطار</span><span class="surah-latin">Al Infitar · The Cleaving</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="83.html"><div class="surah-num">83</div><div class="surah-info"><span class="surah-arabic">المطـفـفين</span><span class="surah-latin">Al Mutaffifin · The Defrauding</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="84.html"><div class="surah-num">84</div><div class="surah-info"><span class="surah-arabic">الانشقاق</span><span class="surah-latin">Al Inshiqaq · The Sundering</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="85.html"><div class="surah-num">85</div><div class="surah-info"><span class="surah-arabic">البروج</span><span class="surah-latin">Al Buruj · The Mansions of Stars</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="86.html"><div class="surah-num">86</div><div class="surah-info"><span class="surah-arabic">الـطارق</span><span class="surah-latin">At Tariq · The Nightcomer</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="87.html"><div class="surah-num">87</div><div class="surah-info"><span class="surah-arabic">الأعـلى</span><span class="surah-latin">Al Ala · The Most High</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="88.html"><div class="surah-num">88</div><div class="surah-info"><span class="surah-arabic">الغاشـيـة</span><span class="surah-latin">Al Ghashiyah · The Overwhelming</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="89.html"><div class="surah-num">89</div><div class="surah-info"><span class="surah-arabic">الفجر</span><span class="surah-latin">Al Fajr · The Dawn</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="90.html"><div class="surah-num">90</div><div class="surah-info"><span class="surah-arabic">الـبلد</span><span class="surah-latin">Al Balad · The City</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="91.html"><div class="surah-num">91</div><div class="surah-info"><span class="surah-arabic">الـشـمـس</span><span class="surah-latin">Ash Shams · The Sun</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="92.html"><div class="surah-num">92</div><div class="surah-info"><span class="surah-arabic">اللـيـل</span><span class="surah-latin">Al Lail · The Night</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="93.html"><div class="surah-num">93</div><div class="surah-info"><span class="surah-arabic">الضـحى</span><span class="surah-latin">Ad Duhaa · The Morning Hours</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="94.html"><div class="surah-num">94</div><div class="surah-info"><span class="surah-arabic">الـشرح</span><span class="surah-latin">Al Sharh · The Relief</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="95.html"><div class="surah-num">95</div><div class="surah-info"><span class="surah-arabic">الـتين</span><span class="surah-latin">At Tin · The Fig</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="96.html"><div class="surah-num">96</div><div class="surah-info"><span class="surah-arabic">الـعلق</span><span class="surah-latin">Al Alaq · The Clot</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="97.html"><div class="surah-num">97</div><div class="surah-info"><span class="surah-arabic">الـقدر</span><span class="surah-latin">Al Qadr · The Power</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="98.html"><div class="surah-num">98</div><div class="surah-info"><span class="surah-arabic">الـبينة</span><span class="surah-latin">Al Bayyinah · The Clear Proof</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="99.html"><div class="surah-num">99</div><div class="surah-info"><span class="surah-arabic">الـزلزلة</span><span class="surah-latin">Az Zalzalah · The Earthquake</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="100.html"><div class="surah-num">100</div><div class="surah-info"><span class="surah-arabic">الـعاديات</span><span class="surah-latin">Al Adiyat · The Courser</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="101.html"><div class="surah-num">101</div><div class="surah-info"><span class="surah-arabic">الـقارعـة</span><span class="surah-latin">Al Qari'ah · The Calamity</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="102.html"><div class="surah-num">102</div><div class="surah-info"><span class="surah-arabic">الـتكاثر</span><span class="surah-latin">At Takathur · Competition in World Increase</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="103.html"><div class="surah-num">103</div><div class="surah-info"><span class="surah-arabic">الـعصر</span><span class="surah-latin">Al Asr · The Declining Day</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="104.html"><div class="surah-num">104</div><div class="surah-info"><span class="surah-arabic">الـهمزة</span><span class="surah-latin">Al Humazah · The Traducer</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="105.html"><div class="surah-num">105</div><div class="surah-info"><span class="surah-arabic">الـفيل</span><span class="surah-latin">Al Fil · The Elephant</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="106.html"><div class="surah-num">106</div><div class="surah-info"><span class="surah-arabic">قريش</span><span class="surah-latin">Quraish · Quraysh</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="107.html"><div class="surah-num">107</div><div class="surah-info"><span class="surah-arabic">المـاعون</span><span class="surah-latin">Al Ma'un · Small Kindnesses</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="108.html"><div class="surah-num">108</div><div class="surah-info"><span class="surah-arabic">الـكوثر</span><span class="surah-latin">Al Kauthar · Abundance</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="109.html"><div class="surah-num">109</div><div class="surah-info"><span class="surah-arabic">الـكافرون</span><span class="surah-latin">Al Kafirun · The Disbelievers</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="110.html"><div class="surah-num">110</div><div class="surah-info"><span class="surah-arabic">الـنصر</span><span class="surah-latin">An Nasr · The Divine Support</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="111.html"><div class="surah-num">111</div><div class="surah-info"><span class="surah-arabic">الـمسد</span><span class="surah-latin">Al Masad · The Palm Fibre</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="112.html"><div class="surah-num">112</div><div class="surah-info"><span class="surah-arabic">الإخلاص</span><span class="surah-latin">Al Ikhlas · Sincerity</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="113.html"><div class="surah-num">113</div><div class="surah-info"><span class="surah-arabic">الـفلق</span><span class="surah-latin">Al Falaq · The Daybreak</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+    <a class="surah-card" href="114.html"><div class="surah-num">114</div><div class="surah-info"><span class="surah-arabic">الـناس</span><span class="surah-latin">An Nas · Mankind</span></div><svg class="surah-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 3 12 9 6"/></svg></a>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-logo">Powered by <span>OneTechDev</span></p>
+  <p class="footer-copy">© 2025 · Holy Quran App · All rights reserved</p>
+</footer>
+
+<script>
+function filterSurahs(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('.surah-card').forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.classList.toggle('hidden', q && !text.includes(q));
+  });
+}
+
+function shareApp() {
+
+const shareData = {
+title: "Quran Download",
+text: "Sauke karatun Al-Qur'ani daga wannan app",
+url: "https://onetechdev.github.io/quran-download/"
+};
+
+if (navigator.share) {
+navigator.share(shareData);
+} else {
+navigator.clipboard.writeText(shareData.url);
+alert("Link copied:\n" + shareData.url);
+}
+}
+</script>
+
+</body>
+</html>

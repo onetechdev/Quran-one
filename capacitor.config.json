@@ -1,0 +1,9 @@
+{
+  "appId": "com.onetechdev.quranone",
+  "appName": "Quran One",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al Haqqah · القرآن الكريم</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #0D1117;
+    --dark-2: #161B22;
+    --dark-card: #1A2233;
+    --text: #E8E8E8;
+    --text-muted: #8B9BC4;
+    --border: rgba(201,168,76,0.18);
+  }
+  body { background: var(--dark); color: var(--text); font-family: 'Poppins', sans-serif; min-height: 100vh; }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 20% 10%, rgba(46,125,82,0.10) 0%, transparent 60%), var(--dark);
+    z-index: -1;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13,17,23,0.9);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    direction: ltr;
+  }
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .nav-back:hover { gap: 12px; }
+  .nav-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  .nav-num {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .surah-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 40px 24px;
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .surah-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent 50%);
+  }
+  .surah-arabic-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    color: var(--gold);
+    display: block;
+    text-shadow: 0 0 40px rgba(201,168,76,0.25);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .surah-latin-title {
+    font-size: 1rem;
+    color: var(--text-muted);
+    direction: ltr;
+    display: block;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .surah-meaning {
+    font-size: 0.85rem;
+    color: rgba(139,155,196,0.6);
+    direction: ltr;
+    position: relative;
+  }
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px auto;
+  }
+  .surah-text {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    line-height: 2.8;
+    text-align: justify;
+    color: var(--text);
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    direction: rtl;
+    letter-spacing: 0.03em;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .footer-logo { font-size: 0.85rem; color: var(--text-muted); direction: ltr; }
+  .footer-logo span { color: var(--gold); font-weight: 600; }
+  @media (max-width: 480px) {
+    .surah-text { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+  <span class="nav-title">الحاقة</span>
+  <span class="nav-num">069</span>
+</nav>
+<main>
+  <div class="surah-header">
+    <span class="surah-arabic-title">الحاقة</span>
+    <div class="divider"></div>
+    <span class="surah-latin-title">Al Haqqah</span>
+    <span class="surah-meaning">· The Reality ·</span>
+  </div>
+  <div class="surah-text">
+    ﻿﻿بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ 
+
+الْحَاقَّةُ (1) مَا الْحَاقَّةُ (2) وَمَا أَدْرَاكَ مَا الْحَاقَّةُ (3) كَذَّبَتْ ثَمُودُ وَعَادٌ بِالْقَارِعَةِ (4) فَأَمَّا ثَمُودُ فَأُهْلِكُوا بِالطَّاغِيَةِ (5) وَأَمَّا عَادٌ فَأُهْلِكُوا بِرِيحٍ صَرْصَرٍ عَاتِيَةٍ (6) سَخَّرَهَا عَلَيْهِمْ سَبْعَ لَيَالٍ وَثَمَانِيَةَ أَيَّامٍ حُسُومًا فَتَرَى الْقَوْمَ فِيهَا صَرْعَى كَأَنَّهُمْ أَعْجَازُ نَخْلٍ خَاوِيَةٍ (7) فَهَلْ تَرَى لَهُمْ مِنْ بَاقِيَةٍ (8) وَجَاءَ فِرْعَوْنُ وَمَنْ قَبْلَهُ وَالْمُؤْتَفِكَاتُ بِالْخَاطِئَةِ (9) فَعَصَوْا رَسُولَ رَبِّهِمْ فَأَخَذَهُمْ أَخْذَةً رَابِيَةً (10) إِنَّا لَمَّا طَغَا الْمَاءُ حَمَلْنَاكُمْ فِي الْجَارِيَةِ (11) لِنَجْعَلَهَا لَكُمْ تَذْكِرَةً وَتَعِيَهَا أُذُنٌ وَاعِيَةٌ (12) فَإِذَا نُفِخَ فِي الصُّورِ نَفْخَةٌ وَاحِدَةٌ (13) وَحُمِلَتِ الْأَرْضُ وَالْجِبَالُ فَدُكَّتَا دَكَّةً وَاحِدَةً (14) فَيَوْمَئِذٍ وَقَعَتِ الْوَاقِعَةُ (15) وَانْشَقَّتِ السَّمَاءُ فَهِيَ يَوْمَئِذٍ وَاهِيَةٌ (16) وَالْمَلَكُ عَلَى أَرْجَائِهَا وَيَحْمِلُ عَرْشَ رَبِّكَ فَوْقَهُمْ يَوْمَئِذٍ ثَمَانِيَةٌ (17) يَوْمَئِذٍ تُعْرَضُونَ لَا تَخْفَى مِنْكُمْ خَافِيَةٌ (18) فَأَمَّا مَنْ أُوتِيَ كِتَابَهُ بِيَمِينِهِ فَيَقُولُ هَاؤُمُ اقْرَءُوا كِتَابِيَهْ (19) إِنِّي ظَنَنْتُ أَنِّي مُلَاقٍ حِسَابِيَهْ (20) فَهُوَ فِي عِيشَةٍ رَاضِيَةٍ (21) فِي جَنَّةٍ عَالِيَةٍ (22) قُطُوفُهَا دَانِيَةٌ (23) كُلُوا وَاشْرَبُوا هَنِيئًا بِمَا أَسْلَفْتُمْ فِي الْأَيَّامِ الْخَالِيَةِ (24) وَأَمَّا مَنْ أُوتِيَ كِتَابَهُ بِشِمَالِهِ فَيَقُولُ يَا لَيْتَنِي لَمْ أُوتَ كِتَابِيَهْ (25) وَلَمْ أَدْرِ مَا حِسَابِيَهْ (26) يَا ‎لَيْتَهَا كَانَتِ الْقَاضِيَةَ (27) مَا أَغْنَى عَنِّي مَالِيَهْ (28) هَلَكَ عَنِّي سُلْطَانِيَهْ (29) خُذُوهُ فَغُلُّوهُ (30) ثُمَّ الْجَحِيمَ صَلُّوهُ (31) ثُمَّ فِي سِلْسِلَةٍ ذَرْعُهَا سَبْعُونَ ذِرَاعًا فَاسْلُكُوهُ (32) إِنّهُ كَانَ لَا يُؤْمِنُ بِاللَّهِ الْعَظِيمِ (33) وَلَا يَحُضُّ عَلَى طَعَامِ الْمِسْكِينِ (34) فَلَيْسَ لَهُ الْيَوْمَ هَاهُنَا حَمِيمٌ (35) وَلَا طَعَامٌ إِلَّا مِنْ غِسْلِينٍ (36) لَا يَأْكُلُهُ إِلَّا الْخَاطِئُونَ (37) فَلَا أُقْسِمُ بِمَا تُبْصِرُونَ (38) وَمَا لَا تُبْصِرُونَ (39) إِنَّهُ لَقَوْلُ رَسُولٍ كَرِيمٍ (40) وَمَا هُوَ بِقَوْلِ شَاعِرٍ قَلِيلًا مَا تُؤْمِنُونَ (41) وَلَا بِقَوْلِ كَاهِنٍ قَلِيلًا مَا تَذَكَّرُونَ (42) تَنْزِيلٌ مِنْ رَبِّ الْعَالَمِينَ (43) وَلَوْ تَقَوَّلَ عَلَيْنَا بَعْضَ الْأَقَاوِيلِ (44) لَأَخَذْنَا مِنْهُ بِالْيَمِينِ (45) ثُمَّ لَقَطَعْنَا مِنْهُ الْوَتِينَ (46) فَمَا مِنْكُمْ مِنْ أَحَدٍ عَنْهُ حَاجِزِينَ (47) وَإِنَّهُ لَتَذْكِرَةٌ لِلْمُتَّقِينَ (48) وَإِنَّا لَنَعْلَمُ أَنَّ مِنْكُمْ مُكَذِّبِينَ (49) وَإِنَّهُ لَحَسْرَةٌ عَلَى الْكَافِرِينَ (50) وَإِنَّهُ لَحَقُّ الْيَقِينِ (51) فَسَبِّحْ بِاسْمِ رَبِّكَ الْعَظِيمِ (52)
+  </div>
+</main>
+<footer>
+  <p class="footer-logo">Powered by <span>OneTechDev</span></p>
+</footer>
+</body>
+</html>
